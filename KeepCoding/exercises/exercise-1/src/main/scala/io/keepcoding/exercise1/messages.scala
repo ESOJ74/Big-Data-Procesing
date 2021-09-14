@@ -3,6 +3,17 @@ package io.keepcoding.exercise1
 import java.net.URI
 import java.util.UUID
 
+object Test {
+  def main(str: Array[String]): Unit = {
+    println(AttachmentMessage("http://google,com"))
+    println(AttachmentMessage(UUID.randomUUID(),URI.create("http://google,com")))
+    println(TextMessage(UUID.randomUUID(),"http://google,com"))
+    println(TextMessage("http://google,com"))
+    println (TextMessage("http://google,com").color)
+    SoundMessage(UUID.randomUUID(),URI.create("http://google,com")).stop()
+    SoundMessage("http://google,com").start()
+  }
+}
 trait Printable {
   def print(): Unit
 }
