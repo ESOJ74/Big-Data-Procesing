@@ -59,6 +59,7 @@ coverage.xml
 *.log
 *.csv
 *.mp4
+*.ipynb
 
 # sbt specific
 dist/*
