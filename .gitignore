@@ -58,6 +58,7 @@ coverage.xml
 *.class
 *.log
 *.csv
+*.mp4
 
 # sbt specific
 dist/*
