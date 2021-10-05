@@ -68,6 +68,7 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
+notebook/Templates/Datasets/
 sbt/*.jar
 mini-complete-example/sbt/*.jar
 
