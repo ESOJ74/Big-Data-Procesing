@@ -1,0 +1,31 @@
+create database datos_padron
+
+
+use datos_padron;
+
+CREATE TABLE padron_txt
+(
+COD_DISTRITO   INT,
+DESC_DISTRITO  STRING,
+COD_DIST_BARRIO INT,
+DESC_BARRIO  STRING,
+COD_BARRIO   INT,
+COD_DIST_SECCION   INT,
+COD_SECCION   INT,
+COD_EDAD_INT   INT,
+EspanolesHombres   INT,
+EspanolesMujeres   INT,
+ExtranjerosHombres   INT,
+ExtranjerosMujeres   INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ";" 
+ESCAPED BY "\""
+STORED AS TEXTFILE;
+
+
+load data local inpath '/home/cloudera/Desktop/Padron/Rango_Edades_Seccion_202110.csv' into table padron_txt;
+
+
+
+"COD_DISTRITO";"DESC_DISTRITO";"COD_DIST_BARRIO";"DESC_BARRIO";"COD_BARRIO";"COD_DIST_SECCION";"COD_SECCION";"COD_EDAD_INT";"EspanolesHombres";"EspanolesMujeres";"ExtranjerosHombres";"ExtranjerosMujeres"
