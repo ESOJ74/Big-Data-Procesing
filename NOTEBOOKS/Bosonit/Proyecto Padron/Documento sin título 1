@@ -1,27 +1,23 @@
-create database datos_padron
-
-
-use datos_padron;
-
-CREATE TABLE padron_txt
+CREATE EXTERNAL TABLE `datos_padron`.`padron_txt`
 (
-COD_DISTRITO   INT,
-DESC_DISTRITO  STRING,
-COD_DIST_BARRIO INT,
-DESC_BARRIO  STRING,
-COD_BARRIO   INT,
-COD_DIST_SECCION   INT,
-COD_SECCION   INT,
-COD_EDAD_INT   INT,
-EspanolesHombres   INT,
-EspanolesMujeres   INT,
-ExtranjerosHombres   INT,
-ExtranjerosMujeres   INT
-)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY ";" 
-ESCAPED BY "\""
-STORED AS TEXTFILE;
+  `COD_DISTRITO` bigint ,
+  `DESC_DISTRITO` string ,
+  `COD_DIST_BARRIO` bigint ,
+  `DESC_BARRIO` string ,
+  `COD_BARRIO` bigint ,
+  `COD_DIST_SECCION` bigint ,
+  `COD_SECCION` bigint ,
+  `COD_EDAD_INT` bigint ,
+  `EspanolesHombres` bigint ,
+  `EspanolesMujeres` bigint ,
+  `ExtranjerosHombres` bigint ,
+  `ExtranjerosMujeres` bigint ) ROW FORMAT   SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+  WITH SERDEPROPERTIES ("separatorChar" = ";",
+  "quoteChar"     = "\"",
+  "escapeChar"    = "\\"
+  )
+  STORED AS TextFile LOCATION '/user/cloudera/Rango_Edades_Seccion_202110.csv_table'
+TBLPROPERTIES("skip.header.line.count" = "1")
 
 
 load data local inpath '/home/cloudera/Desktop/Padron/Rango_Edades_Seccion_202110.csv' into table padron_txt;
@@ -29,3 +25,26 @@ load data local inpath '/home/cloudera/Desktop/Padron/Rango_Edades_Seccion_20211
 
 
 "COD_DISTRITO";"DESC_DISTRITO";"COD_DIST_BARRIO";"DESC_BARRIO";"COD_BARRIO";"COD_DIST_SECCION";"COD_SECCION";"COD_EDAD_INT";"EspanolesHombres";"EspanolesMujeres";"ExtranjerosHombres";"ExtranjerosMujeres"
+
+
+CREATE TABLE padron_txt_2
+STORED AS TextFile LOCATION '/user/cloudera/Rango_Edades_Seccion_202110.csv_table'
+AS
+SELECT TRIM(cod_distrito) FROM padron_txt
+
+
+insert overwrite table datos_padron.padron_particionado PARTITION (DESC_BARRIO = 'Palacio')
+  select 
+  COD_DISTRITO,
+  DESC_DISTRITO,
+  COD_DIST_BARRIO,
+  DESC_BARRIO,
+  COD_BARRIO,
+  COD_DIST_SECCION,
+  COD_SECCION,
+  COD_EDAD_INT,
+  EspanolesHombres,
+  EspanolesMujeres,
+  ExtranjerosHombres,
+  ExtranjerosMujeres
+  from padron_parquet_2 where DESC_BARRIO = "PALACIO"
