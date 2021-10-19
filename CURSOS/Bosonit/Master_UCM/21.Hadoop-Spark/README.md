@@ -1,2 +1,0 @@
-# Curso Apache Spark 
-
