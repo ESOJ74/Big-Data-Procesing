@@ -1,5 +1,5 @@
 
-object AnalisisExploratorio extends App {
+object AnalisisExploratorio extends Analizador {
 
   val dataset = Utilidades.readFile(fichero = "src/adult.data.clean.csv")
 
@@ -68,6 +68,6 @@ object AnalisisExploratorio extends App {
   //  println(s" -> La media de años de estudio de los contribuyenes de origen distinto a United States es: ${aniosEstudiosMedio(c = dataset)}")
 
   // ejercicio-11
-  // llama a la función impimeContribuyentes
+  imprimeContribuyentes(c = dataset)
 
 }

@@ -16,7 +16,7 @@ case class Contribuyente(
                   )
 
 // Implementa el companion object
-// ejercicio-7:
+// ejercicio-8:
 // Dada la clase 'Contribuyente' y es a la que se mapea cada fila del csv, se pide que se cree su companion object y
 // defina la función:
 //  - imprimeDatos que muestre por consola el siguiente formato: "$workclass - $occupation - $nativeCountry - $income"
